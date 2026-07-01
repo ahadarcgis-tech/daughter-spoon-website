@@ -310,10 +310,6 @@
 
                 <!-- Desktop Links -->
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="items.html" class="text-sm font-medium text-charcoal-700 hover:text-terracotta-500 transition-colors duration-300 relative group">
-                        Items
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
                     <a href="#menu" class="text-sm font-medium text-charcoal-700 hover:text-terracotta-500 transition-colors duration-300 relative group">
                         Menu
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
@@ -359,7 +355,6 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="mobile-menu is-closed md:hidden pb-4">
                 <div class="bg-white/95 backdrop-blur-lg rounded-2xl shadow-lg p-6 space-y-1 border border-warm-200">
-                    <a href="items.html" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Items</a>
                     <a href="#menu" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Menu</a>
                     <a href="#catering" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Catering</a>
                     <a href="#our-story" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Our Story</a>
@@ -376,7 +371,7 @@
         <div class="absolute inset-0">
             <img
                 id="hero-bg-img"
-                src="hero-bg.jpg"
+                src="images/hero-bg.jpg"
                 alt="Mother and daughter cooking together in a warm kitchen"
                 class="w-full h-full object-cover"
                 style="object-position: 70% center;"
@@ -463,10 +458,10 @@
     </section>
 
     <!-- ========== MENU SECTION ========== -->
-    <section id="menu" class="relative py-12 sm:py-16 bg-cream-50">
+    <section id="menu" class="relative py-20 sm:py-28 bg-cream-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
-            <div class="text-center mb-8 reveal">
+            <div class="text-center mb-16 reveal">
                 <span class="inline-block text-terracotta-500 font-semibold text-sm uppercase tracking-widest mb-3">Our Menu</span>
                 <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-4">
                     Crafted with <span class="text-terracotta-500 italic">Care</span>
@@ -489,7 +484,7 @@
     </section>
 
     <!-- ========== OUR STORY SECTION ========== -->
-    <section id="our-story" class="relative py-12 sm:py-16 bg-warm-50 overflow-hidden">
+    <section id="our-story" class="relative py-20 sm:py-28 bg-warm-50 overflow-hidden">
         <!-- Wave top -->
         <div class="wave-top">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -505,7 +500,7 @@
                 <!-- Image Side -->
                 <div class="relative reveal">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img id="story-img" src="spices.png" alt="Fresh spices and herbs arranged in ceramic bowls" class="w-full h-80 sm:h-96 lg:h-[480px] object-cover" loading="lazy">
+                        <img id="story-img" src="images/spices.png" alt="Fresh spices and herbs arranged in ceramic bowls" class="w-full h-80 sm:h-96 lg:h-[480px] object-cover" loading="lazy">
                     </div>
                     <!-- Floating accent -->
                     <div class="absolute -bottom-6 -right-6 bg-terracotta-100 rounded-2xl p-6 shadow-lg hidden sm:block">
@@ -679,7 +674,7 @@
 
                     <!-- Catering Image -->
                     <div class="rounded-3xl overflow-hidden shadow-xl mb-8">
-                        <img id="catering-img" src="catering.png" alt="Beautiful catering spread" class="w-full h-64 sm:h-72 object-cover" loading="lazy">
+                        <img id="catering-img" src="images/catering.png" alt="Beautiful catering spread" class="w-full h-64 sm:h-72 object-cover" loading="lazy">
                     </div>
 
                     <!-- Stats -->
@@ -764,7 +759,6 @@
                 <div>
                     <h4 class="font-serif text-lg font-semibold text-cream-100 mb-5">Quick Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="items.html" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Items</a></li>
                         <li><a href="#menu" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Menu</a></li>
                         <li><a href="#catering" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Catering</a></li>
                         <li><a href="#our-story" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Our Story</a></li>
@@ -1036,7 +1030,7 @@
             const defaultMenuData = [
                 {
                     id: 'menu-1',
-                    image: 'snack-box.png',
+                    image: 'images/snack-box.png',
                     name: 'Signature Snack Box',
                     price: '$24',
                     desc: 'A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.',
@@ -1044,7 +1038,7 @@
                 },
                 {
                     id: 'menu-2',
-                    image: 'comfort-meal.png',
+                    image: 'images/comfort-meal.png',
                     name: 'Comfort Meal of the Day',
                     price: '$18',
                     desc: 'Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.',
@@ -1052,7 +1046,7 @@
                 },
                 {
                     id: 'menu-3',
-                    image: 'cookies.png',
+                    image: 'images/cookies.png',
                     name: 'Artisanal Cookies',
                     price: '$12',
                     desc: 'A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.',
@@ -1060,7 +1054,7 @@
                 },
                 {
                     id: 'menu-4',
-                    image: 'lemonade.png',
+                    image: 'images/lemonade.png',
                     name: 'Fresh Lemonade',
                     price: '$6',
                     desc: 'Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.',
@@ -1112,8 +1106,7 @@
                     article.className = 'menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible';
                     article.style.transitionDelay = delay + 's';
                     
-                    const itemName = item.name || 'Menu Item';
-                    const escName = itemName.replace(/'/g, "\\'");
+                    const escName = item.name.replace(/'/g, "\\'");
                     
                     article.innerHTML = \`
                         <div class="relative overflow-hidden">

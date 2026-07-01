@@ -148,6 +148,21 @@
                     </div>
                 </section>
 
+                <!-- ITEMS PAGE SECTION -->
+                <section>
+                    <div class="flex justify-between items-center border-b border-warm-200 pb-2 mb-6">
+                        <h3 class="text-lg font-bold text-terracotta-600">Extra Items (Items Page)</h3>
+                        <button onclick="addExtraItem()" class="bg-olive-100 hover:bg-olive-200 text-olive-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            Add Extra Item
+                        </button>
+                    </div>
+                    
+                    <div id="extra-items-container" class="space-y-6">
+                        <!-- Items will be injected here by JS -->
+                    </div>
+                </section>
+
                 <!-- STORY & TESTIMONIAL SECTION -->
                 <section>
                     <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Our Story & Testimonial</h3>
@@ -222,7 +237,7 @@
         const defaultMenuData = [
             {
                 id: 'menu-1',
-                image: 'images/snack-box.png',
+                image: 'snack-box.png',
                 name: 'Signature Snack Box',
                 price: '$24',
                 desc: 'A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.',
@@ -230,7 +245,7 @@
             },
             {
                 id: 'menu-2',
-                image: 'images/comfort-meal.png',
+                image: 'comfort-meal.png',
                 name: 'Comfort Meal of the Day',
                 price: '$18',
                 desc: 'Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.',
@@ -238,7 +253,7 @@
             },
             {
                 id: 'menu-3',
-                image: 'images/cookies.png',
+                image: 'cookies.png',
                 name: 'Artisanal Cookies',
                 price: '$12',
                 desc: 'A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.',
@@ -246,7 +261,7 @@
             },
             {
                 id: 'menu-4',
-                image: 'images/lemonade.png',
+                image: 'lemonade.png',
                 name: 'Fresh Lemonade',
                 price: '$6',
                 desc: 'Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.',
@@ -254,10 +269,30 @@
             }
         ];
 
+        const defaultItemsData = [
+            {
+                id: 'item-1',
+                image: 'spices.png',
+                name: 'Premium Spices Set',
+                price: '$35',
+                desc: 'A curated box of our finest hand-ground spices used in all our signature dishes.',
+                label: 'Pantry'
+            },
+            {
+                id: 'item-2',
+                image: 'hero-bg.jpg',
+                name: 'Gift Card',
+                price: '$50',
+                desc: 'Give the gift of homemade meals. Can be used for catering or daily orders.',
+                label: 'Gift'
+            }
+        ];
+
         let siteData = {
             text: {},
             images: {},
-            menu: []
+            menu: [],
+            items: []
         };
 
         // --- Authentication Logic ---
@@ -305,6 +340,7 @@
             if (!siteData.text) siteData.text = {};
             if (!siteData.images) siteData.images = {};
             if (!siteData.menu || siteData.menu.length === 0) siteData.menu = JSON.parse(JSON.stringify(defaultMenuData));
+            if (!siteData.items || siteData.items.length === 0) siteData.items = JSON.parse(JSON.stringify(defaultItemsData));
 
             // 1. Populate Text Inputs
             document.querySelectorAll('input[type="text"][data-target], textarea[data-target]').forEach(input => {
@@ -320,8 +356,8 @@
                 // Show preview if exists
                 let imgData = siteData.images[target];
                 if (!imgData) {
-                    if (target === 'hero-bg-img') imgData = 'images/hero-bg.jpg';
-                    if (target === 'story-img') imgData = 'images/spices.png';
+                    if (target === 'hero-bg-img') imgData = 'hero-bg.jpg';
+                    if (target === 'story-img') imgData = 'spices.png';
                 }
                 if (imgData) {
                     const preview = document.getElementById(`preview-${target}`);
@@ -332,8 +368,9 @@
                 }
             });
 
-            // 3. Render Menu List
+            // Render Lists
             renderMenuAdmin();
+            renderItemsAdmin();
         });
 
         // --- Menu Logic ---
@@ -391,7 +428,7 @@
         function addMenuItem() {
             siteData.menu.push({
                 id: 'menu-' + Date.now(),
-                image: 'images/snack-box.png',
+                image: 'snack-box.png',
                 name: 'New Item',
                 price: '$10',
                 desc: 'Description goes here.',
@@ -407,6 +444,73 @@
             }
         }
 
+        function renderItemsAdmin() {
+            const container = document.getElementById('extra-items-container');
+            container.innerHTML = '';
+            
+            siteData.items.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-white rounded-xl border border-warm-200 grid grid-cols-1 md:grid-cols-4 gap-4 items-center';
+                div.innerHTML = `
+                    <div class="md:col-span-4 flex justify-between items-center mb-2">
+                        <span class="font-bold text-charcoal-700 text-sm">Extra Item #${index + 1}</span>
+                        <button onclick="removeExtraItem(${index})" class="text-terracotta-500 hover:text-terracotta-600 text-sm font-semibold">Remove</button>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-xs font-medium text-charcoal-600 mb-1">Image</label>
+                        <input type="file" accept="image/*" class="item-img-upload block w-full text-xs text-charcoal-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-olive-50 file:text-olive-700" data-index="${index}">
+                        <img src="${item.image}" class="image-preview" style="display:block; height:80px;" id="preview-item-${index}">
+                    </div>
+                    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Name</label>
+                            <input type="text" value="${item.name.replace(/"/g, '&quot;')}" class="item-name w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Price</label>
+                            <input type="text" value="${item.price}" class="item-price w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Tag/Label</label>
+                            <input type="text" value="${item.label}" class="item-label w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Description</label>
+                            <input type="text" value="${item.desc.replace(/"/g, '&quot;')}" class="item-desc w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+
+                const fileInput = div.querySelector('.item-img-upload');
+                fileInput.addEventListener('change', function(e) {
+                    processImage(e.target.files[0], (base64) => {
+                        siteData.items[index].image = base64;
+                        document.getElementById(`preview-item-${index}`).src = base64;
+                    });
+                });
+            });
+        }
+
+        function addExtraItem() {
+            siteData.items.push({
+                id: 'item-' + Date.now(),
+                image: 'snack-box.png',
+                name: 'New Extra Item',
+                price: '$10',
+                desc: 'Description goes here.',
+                label: 'New'
+            });
+            renderItemsAdmin();
+        }
+
+        function removeExtraItem(index) {
+            if (confirm("Are you sure you want to remove this item?")) {
+                siteData.items.splice(index, 1);
+                renderItemsAdmin();
+            }
+        }
+
         // --- Save Logic ---
         function saveAll() {
             // Save Text
@@ -419,6 +523,12 @@
             document.querySelectorAll('.menu-price').forEach(el => siteData.menu[el.dataset.index].price = el.value);
             document.querySelectorAll('.menu-label').forEach(el => siteData.menu[el.dataset.index].label = el.value);
             document.querySelectorAll('.menu-desc').forEach(el => siteData.menu[el.dataset.index].desc = el.value);
+
+            // Save Items updates
+            document.querySelectorAll('.item-name').forEach(el => siteData.items[el.dataset.index].name = el.value);
+            document.querySelectorAll('.item-price').forEach(el => siteData.items[el.dataset.index].price = el.value);
+            document.querySelectorAll('.item-label').forEach(el => siteData.items[el.dataset.index].label = el.value);
+            document.querySelectorAll('.item-desc').forEach(el => siteData.items[el.dataset.index].desc = el.value);
 
             try {
                 localStorage.setItem('daughterSpoonContent', JSON.stringify(siteData));
