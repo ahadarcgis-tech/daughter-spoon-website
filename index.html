@@ -511,11 +511,11 @@
                         <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Bestseller</span>
                         <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Signature Snack Box</h3>
                         <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.</p>
-                        <button onclick="addToCart('Signature Snack Box')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
+                        <button onclick="openCheckout('Signature Snack Box', '৳24')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Add to Cart
+                            Order Now
                         </button>
                     </div>
                 </article>
@@ -539,11 +539,11 @@
                         <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Chef's Pick</span>
                         <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Comfort Meal of the Day</h3>
                         <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.</p>
-                        <button onclick="addToCart('Comfort Meal of the Day')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
+                        <button onclick="openCheckout('Comfort Meal of the Day', '৳18')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Add to Cart
+                            Order Now
                         </button>
                     </div>
                 </article>
@@ -567,11 +567,11 @@
                         <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Sweet Treats</span>
                         <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Artisanal Cookies</h3>
                         <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.</p>
-                        <button onclick="addToCart('Artisanal Cookies')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
+                        <button onclick="openCheckout('Artisanal Cookies', '৳12')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Add to Cart
+                            Order Now
                         </button>
                     </div>
                 </article>
@@ -595,11 +595,11 @@
                         <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Refreshing</span>
                         <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Fresh Lemonade</h3>
                         <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.</p>
-                        <button onclick="addToCart('Fresh Lemonade')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
+                        <button onclick="openCheckout('Fresh Lemonade', '৳6')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Add to Cart
+                            Order Now
                         </button>
                     </div>
                 </article>
@@ -968,19 +968,81 @@
         let cartCount = 0;
         const cartBadge = document.getElementById('cart-badge');
 
-        function addToCart(itemName) {
+        function openCheckout(itemName, itemPrice) {
+            document.getElementById('checkout-hidden-item').value = itemName;
+            document.getElementById('checkout-hidden-price').value = itemPrice;
+            document.getElementById('checkout-item-name').textContent = itemName;
+            document.getElementById('checkout-item-price').textContent = itemPrice;
+            
+            document.getElementById('checkout-form').classList.remove('hidden');
+            document.getElementById('checkout-success').classList.add('hidden');
+            document.getElementById('checkout-form').reset();
+
+            const modal = document.getElementById('checkout-modal');
+            const modalBox = modal.querySelector('div');
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            
+            // trigger reflow
+            void modal.offsetWidth;
+            
+            modal.classList.add('opacity-100');
+            modal.classList.remove('opacity-0');
+            modalBox.classList.add('scale-100');
+            modalBox.classList.remove('scale-95');
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const modalBox = modal.querySelector('div');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            const orderData = {
+                id: 'ORD-' + Math.floor(Math.random() * 1000000),
+                item: document.getElementById('checkout-hidden-item').value,
+                price: document.getElementById('checkout-hidden-price').value,
+                name: document.getElementById('checkout-name').value,
+                phone: document.getElementById('checkout-phone').value,
+                email: document.getElementById('checkout-email').value,
+                address: document.getElementById('checkout-address').value,
+                date: new Date().toISOString(),
+                status: 'New'
+            };
+
+            // Save to localStorage
+            let orders = [];
+            try {
+                const existing = localStorage.getItem('daughterSpoonOrders');
+                if (existing) orders = JSON.parse(existing);
+            } catch(e) {}
+            
+            orders.push(orderData);
+            localStorage.setItem('daughterSpoonOrders', JSON.stringify(orders));
+
+            // Update UI
+            document.getElementById('checkout-form').classList.add('hidden');
+            document.getElementById('checkout-success').classList.remove('hidden');
+            
             cartCount++;
             cartBadge.textContent = cartCount;
             cartBadge.classList.remove('opacity-0', 'scale-75');
             cartBadge.classList.add('opacity-100', 'scale-100', 'cart-badge-pop');
-
-            // Remove animation class after it finishes
             setTimeout(() => {
                 cartBadge.classList.remove('cart-badge-pop');
             }, 400);
-
-            // Show toast notification
-            showToast(`${itemName} added to cart!`);
         }
 
         // ===== Toast Notifications =====
@@ -1253,11 +1315,11 @@
                             <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">\${item.label}</span>
                             <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">\${item.name}</h3>
                             <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">\${item.desc}</p>
-                            <button onclick="addToCart('\${escName}')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
+                            <button onclick="openCheckout('\${escName}', '\${item.price}')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                                 </svg>
-                                Add to Cart
+                                Order Now
                             </button>
                         </div>
                     \`;

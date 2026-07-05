@@ -6,6 +6,8 @@
     <title>Admin Dashboard - Daughter Spoon</title>
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -106,6 +108,7 @@
                 <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="items">Extra Items</button>
                 <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="story">Story & Testimonial</button>
                 <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="footer">Contact / Footer</button>
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="orders">Orders & CRM</button>
             </div>
 
             <div class="p-6 md:p-8 min-h-[400px]">
@@ -207,6 +210,46 @@
                         <div>
                             <label class="block text-sm font-medium text-charcoal-700 mb-1">Email Address</label>
                             <input type="text" id="input-footer-email" data-target="footer-email" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ORDERS & CRM SECTION -->
+                <section id="tab-orders" class="tab-content hidden">
+                    <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Orders & CRM Dashboard</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="md:col-span-2 bg-white rounded-xl border border-warm-200 p-4">
+                            <h4 class="text-sm font-bold text-charcoal-700 mb-4">Orders by Item</h4>
+                            <div class="relative h-64">
+                                <canvas id="ordersChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-olive-50 rounded-xl border border-olive-100 p-6 flex flex-col justify-center items-center text-center">
+                            <h4 class="text-sm font-bold text-olive-700 mb-2">Total Orders</h4>
+                            <span id="total-orders-count" class="text-6xl font-serif font-bold text-olive-600">0</span>
+                        </div>
+                    </div>
+
+                    <h4 class="text-sm font-bold text-charcoal-700 mb-4">Recent Orders</h4>
+                    <div class="overflow-x-auto rounded-xl border border-warm-200">
+                        <table class="w-full text-left text-sm text-charcoal-600 whitespace-nowrap">
+                            <thead class="text-xs text-charcoal-500 uppercase bg-warm-50 border-b border-warm-200">
+                                <tr>
+                                    <th class="px-4 py-3 font-semibold">Order ID</th>
+                                    <th class="px-4 py-3 font-semibold">Date</th>
+                                    <th class="px-4 py-3 font-semibold">Customer</th>
+                                    <th class="px-4 py-3 font-semibold">Contact</th>
+                                    <th class="px-4 py-3 font-semibold">Item Ordered</th>
+                                    <th class="px-4 py-3 font-semibold">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body" class="divide-y divide-warm-100 bg-white">
+                                <!-- Orders will be injected here -->
+                            </tbody>
+                        </table>
+                        <div id="no-orders-msg" class="text-center py-8 text-charcoal-400 hidden bg-white">
+                            No orders found yet.
                         </div>
                     </div>
                 </section>
@@ -444,6 +487,7 @@
             // Render Lists
             renderMenuAdmin();
             renderItemsAdmin();
+            renderOrdersAdmin();
         });
 
         // --- Menu Logic ---
@@ -712,6 +756,100 @@
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.dataset.tab));
         });
+
+        // --- CRM & Orders Logic ---
+        let ordersChartInstance = null;
+
+        function renderOrdersAdmin() {
+            let orders = [];
+            try {
+                const stored = localStorage.getItem('daughterSpoonOrders');
+                if (stored) orders = JSON.parse(stored);
+            } catch(e) { console.error('Error reading orders:', e); }
+
+            // Sort orders newest first
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Update Total
+            document.getElementById('total-orders-count').textContent = orders.length;
+
+            // Render Table
+            const tbody = document.getElementById('orders-table-body');
+            const noOrdersMsg = document.getElementById('no-orders-msg');
+            tbody.innerHTML = '';
+            
+            if (orders.length === 0) {
+                noOrdersMsg.classList.remove('hidden');
+            } else {
+                noOrdersMsg.classList.add('hidden');
+                orders.forEach(order => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-warm-50 transition-colors';
+                    const orderDate = new Date(order.date).toLocaleDateString() + ' ' + new Date(order.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    tr.innerHTML = `
+                        <td class="px-4 py-3 font-medium text-charcoal-800">\${order.id}</td>
+                        <td class="px-4 py-3">\${orderDate}</td>
+                        <td class="px-4 py-3">\${order.name}</td>
+                        <td class="px-4 py-3">\${order.phone}<br><span class="text-xs text-charcoal-400">\${order.email}</span></td>
+                        <td class="px-4 py-3 font-medium text-olive-600">\${order.item}</td>
+                        <td class="px-4 py-3">\${order.price}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Render Chart
+            renderChart(orders);
+        }
+
+        function renderChart(orders) {
+            const ctx = document.getElementById('ordersChart').getContext('2d');
+            
+            // Tally items
+            const itemCounts = {};
+            orders.forEach(o => {
+                itemCounts[o.item] = (itemCounts[o.item] || 0) + 1;
+            });
+            
+            const labels = Object.keys(itemCounts);
+            const data = Object.values(itemCounts);
+
+            if (ordersChartInstance) {
+                ordersChartInstance.destroy();
+            }
+
+            if (labels.length === 0) {
+                // Empty state
+                labels.push('No Orders Yet');
+                data.push(1);
+            }
+
+            ordersChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Orders',
+                        data: data,
+                        backgroundColor: '#E07A5F',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1, precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
