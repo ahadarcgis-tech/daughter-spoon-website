@@ -99,10 +99,19 @@
                 <p class="text-sm text-charcoal-500 mt-1">Update text and upload images. Images are automatically compressed to save space.</p>
             </div>
 
-            <div class="p-6 md:p-8 space-y-12">
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto border-b border-warm-200 bg-white">
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-olive-600 border-olive-600 active" data-tab="hero">Hero Section</button>
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="menu">Menu Items</button>
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="items">Extra Items</button>
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="story">Story & Testimonial</button>
+                <button class="tab-btn px-6 py-4 text-sm font-semibold border-b-2 whitespace-nowrap text-charcoal-500 border-transparent hover:text-charcoal-800" data-tab="footer">Contact / Footer</button>
+            </div>
+
+            <div class="p-6 md:p-8 min-h-[400px]">
                 
                 <!-- HERO SECTION -->
-                <section>
+                <section id="tab-hero" class="tab-content">
                     <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Hero Section</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="md:col-span-2">
@@ -134,7 +143,7 @@
                 </section>
 
                 <!-- MENU ITEMS SECTION -->
-                <section>
+                <section id="tab-menu" class="tab-content hidden">
                     <div class="flex justify-between items-center border-b border-warm-200 pb-2 mb-6">
                         <h3 class="text-lg font-bold text-terracotta-600">Menu Items</h3>
                         <button onclick="addMenuItem()" class="bg-olive-100 hover:bg-olive-200 text-olive-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
@@ -149,7 +158,7 @@
                 </section>
 
                 <!-- ITEMS PAGE SECTION -->
-                <section>
+                <section id="tab-items" class="tab-content hidden">
                     <div class="flex justify-between items-center border-b border-warm-200 pb-2 mb-6">
                         <h3 class="text-lg font-bold text-terracotta-600">Extra Items (Items Page)</h3>
                         <button onclick="addExtraItem()" class="bg-olive-100 hover:bg-olive-200 text-olive-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
@@ -164,7 +173,7 @@
                 </section>
 
                 <!-- STORY & TESTIMONIAL SECTION -->
-                <section>
+                <section id="tab-story" class="tab-content hidden">
                     <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Our Story & Testimonial</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="md:col-span-2">
@@ -192,7 +201,7 @@
                 </section>
 
                 <!-- FOOTER SECTION -->
-                <section>
+                <section id="tab-footer" class="tab-content hidden">
                     <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Contact / Footer</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -239,7 +248,7 @@
                 id: 'menu-1',
                 image: 'snack-box.png',
                 name: 'Signature Snack Box',
-                price: '$24',
+                price: '৳24',
                 desc: 'A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.',
                 label: 'Bestseller'
             },
@@ -247,7 +256,7 @@
                 id: 'menu-2',
                 image: 'comfort-meal.png',
                 name: 'Comfort Meal of the Day',
-                price: '$18',
+                price: '৳18',
                 desc: 'Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.',
                 label: 'Chef\'s Pick'
             },
@@ -255,7 +264,7 @@
                 id: 'menu-3',
                 image: 'cookies.png',
                 name: 'Artisanal Cookies',
-                price: '$12',
+                price: '৳12',
                 desc: 'A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.',
                 label: 'Sweet Treats'
             },
@@ -263,7 +272,7 @@
                 id: 'menu-4',
                 image: 'lemonade.png',
                 name: 'Fresh Lemonade',
-                price: '$6',
+                price: '৳6',
                 desc: 'Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.',
                 label: 'Refreshing'
             }
@@ -274,7 +283,7 @@
                 id: 'item-1',
                 image: 'spices.png',
                 name: 'Premium Spices Set',
-                price: '$35',
+                price: '৳35',
                 desc: 'A curated box of our finest hand-ground spices used in all our signature dishes.',
                 label: 'Pantry'
             },
@@ -282,7 +291,7 @@
                 id: 'item-2',
                 image: 'hero-bg.jpg',
                 name: 'Gift Card',
-                price: '$50',
+                price: '৳50',
                 desc: 'Give the gift of homemade meals. Can be used for catering or daily orders.',
                 label: 'Gift'
             },
@@ -290,7 +299,7 @@
                 id: 'item-3',
                 image: 'snack-box.png',
                 name: 'Spoon Merchandise Tote',
-                price: '$15',
+                price: '৳15',
                 desc: 'A heavy-duty canvas tote bag featuring our classic logo. Perfect for groceries.',
                 label: 'Merch'
             },
@@ -306,7 +315,7 @@
                 id: 'item-5',
                 image: 'catering-spread.png',
                 name: 'Family Feast Bundle',
-                price: '$85',
+                price: '৳85',
                 desc: 'A complete meal for 4-6 people including mains, sides, and dessert.',
                 label: 'Bundle'
             },
@@ -314,7 +323,7 @@
                 id: 'item-6',
                 image: 'comfort-meal.png',
                 name: 'Weekly Meal Prep (5 Days)',
-                price: '$120',
+                price: '৳120',
                 desc: 'Fresh, healthy homemade lunches prepared and delivered for your work week.',
                 label: 'Subscription'
             },
@@ -322,7 +331,7 @@
                 id: 'item-7',
                 image: 'snack-box.png',
                 name: 'Artisan Chutney Trio',
-                price: '$22',
+                price: '৳22',
                 desc: 'Three jars of our signature homemade chutneys: Mango, Mint-Coriander, and Tamarind.',
                 label: 'Pantry'
             },
@@ -330,7 +339,7 @@
                 id: 'item-8',
                 image: 'lemonade.png',
                 name: 'Signature Marinade Bottle',
-                price: '$14',
+                price: '৳14',
                 desc: 'Our secret family marinade recipe, perfect for grilling chicken or vegetables.',
                 label: 'Pantry'
             },
@@ -338,7 +347,7 @@
                 id: 'item-9',
                 image: 'hero-bg.jpg',
                 name: 'Cooking Masterclass (Virtual)',
-                price: '$45',
+                price: '৳45',
                 desc: 'Join a 2-hour live virtual cooking class with our head chef.',
                 label: 'Event'
             },
@@ -346,7 +355,7 @@
                 id: 'item-10',
                 image: 'cookies.png',
                 name: 'Seasonal Dessert Box',
-                price: '$30',
+                price: '৳30',
                 desc: 'A rotating selection of seasonal sweets and pastries.',
                 label: 'Sweet Treats'
             }
@@ -494,7 +503,7 @@
                 id: 'menu-' + Date.now(),
                 image: 'snack-box.png',
                 name: 'New Item',
-                price: '$10',
+                price: '৳10',
                 desc: 'Description goes here.',
                 label: 'New'
             });
@@ -561,7 +570,7 @@
                 id: 'item-' + Date.now(),
                 image: 'snack-box.png',
                 name: 'New Extra Item',
-                price: '$10',
+                price: '৳10',
                 desc: 'Description goes here.',
                 label: 'New'
             });
@@ -677,6 +686,32 @@
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
+
+        // --- Tabs Logic ---
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('text-olive-600', 'border-olive-600', 'active');
+                    btn.classList.remove('text-charcoal-500', 'border-transparent');
+                } else {
+                    btn.classList.remove('text-olive-600', 'border-olive-600', 'active');
+                    btn.classList.add('text-charcoal-500', 'border-transparent');
+                }
+            });
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if (content.id === 'tab-' + tabId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
     </script>
 </body>
 </html>

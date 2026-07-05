@@ -34,23 +34,23 @@ def get_card_html(item, index):
                 </article>'''
 
 index_items = [
-    { "id": "menu-1", "image": "snack-box.png", "name": "Signature Snack Box", "price": "$24", "desc": "A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.", "label": "Bestseller" },
-    { "id": "menu-2", "image": "comfort-meal.png", "name": "Comfort Meal of the Day", "price": "$18", "desc": "Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.", "label": "Chef's Pick" },
-    { "id": "menu-3", "image": "cookies.png", "name": "Artisanal Cookies", "price": "$12", "desc": "A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.", "label": "Sweet Treats" },
-    { "id": "menu-4", "image": "lemonade.png", "name": "Fresh Lemonade", "price": "$6", "desc": "Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.", "label": "Refreshing" }
+    { "id": "menu-1", "image": "snack-box.png", "name": "Signature Snack Box", "price": "৳24", "desc": "A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.", "label": "Bestseller" },
+    { "id": "menu-2", "image": "comfort-meal.png", "name": "Comfort Meal of the Day", "price": "৳18", "desc": "Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.", "label": "Chef's Pick" },
+    { "id": "menu-3", "image": "cookies.png", "name": "Artisanal Cookies", "price": "৳12", "desc": "A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.", "label": "Sweet Treats" },
+    { "id": "menu-4", "image": "lemonade.png", "name": "Fresh Lemonade", "price": "৳6", "desc": "Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.", "label": "Refreshing" }
 ]
 
 items_page_items = [
-    { "id": "item-1", "image": "spices.png", "name": "Premium Spices Set", "price": "$35", "desc": "A curated box of our finest hand-ground spices used in all our signature dishes.", "label": "Pantry" },
-    { "id": "item-2", "image": "hero-bg.jpg", "name": "Gift Card", "price": "$50", "desc": "Give the gift of homemade meals. Can be used for catering or daily orders.", "label": "Gift" },
-    { "id": "item-3", "image": "snack-box.png", "name": "Spoon Merchandise Tote", "price": "$15", "desc": "A heavy-duty canvas tote bag featuring our classic logo. Perfect for groceries.", "label": "Merch" },
+    { "id": "item-1", "image": "spices.png", "name": "Premium Spices Set", "price": "৳35", "desc": "A curated box of our finest hand-ground spices used in all our signature dishes.", "label": "Pantry" },
+    { "id": "item-2", "image": "hero-bg.jpg", "name": "Gift Card", "price": "৳50", "desc": "Give the gift of homemade meals. Can be used for catering or daily orders.", "label": "Gift" },
+    { "id": "item-3", "image": "snack-box.png", "name": "Spoon Merchandise Tote", "price": "৳15", "desc": "A heavy-duty canvas tote bag featuring our classic logo. Perfect for groceries.", "label": "Merch" },
     { "id": "item-4", "image": "cookies.png", "name": "Custom Catering Consultation", "price": "Free", "desc": "Book a 30-minute session with our chef to plan your next event menu.", "label": "Service" },
-    { "id": "item-5", "image": "catering-spread.png", "name": "Family Feast Bundle", "price": "$85", "desc": "A complete meal for 4-6 people including mains, sides, and dessert.", "label": "Bundle" },
-    { "id": "item-6", "image": "comfort-meal.png", "name": "Weekly Meal Prep (5 Days)", "price": "$120", "desc": "Fresh, healthy homemade lunches prepared and delivered for your work week.", "label": "Subscription" },
-    { "id": "item-7", "image": "snack-box.png", "name": "Artisan Chutney Trio", "price": "$22", "desc": "Three jars of our signature homemade chutneys: Mango, Mint-Coriander, and Tamarind.", "label": "Pantry" },
-    { "id": "item-8", "image": "lemonade.png", "name": "Signature Marinade Bottle", "price": "$14", "desc": "Our secret family marinade recipe, perfect for grilling chicken or vegetables.", "label": "Pantry" },
-    { "id": "item-9", "image": "hero-bg.jpg", "name": "Cooking Masterclass (Virtual)", "price": "$45", "desc": "Join a 2-hour live virtual cooking class with our head chef.", "label": "Event" },
-    { "id": "item-10", "image": "cookies.png", "name": "Seasonal Dessert Box", "price": "$30", "desc": "A rotating selection of seasonal sweets and pastries.", "label": "Sweet Treats" }
+    { "id": "item-5", "image": "catering-spread.png", "name": "Family Feast Bundle", "price": "৳85", "desc": "A complete meal for 4-6 people including mains, sides, and dessert.", "label": "Bundle" },
+    { "id": "item-6", "image": "comfort-meal.png", "name": "Weekly Meal Prep (5 Days)", "price": "৳120", "desc": "Fresh, healthy homemade lunches prepared and delivered for your work week.", "label": "Subscription" },
+    { "id": "item-7", "image": "snack-box.png", "name": "Artisan Chutney Trio", "price": "৳22", "desc": "Three jars of our signature homemade chutneys: Mango, Mint-Coriander, and Tamarind.", "label": "Pantry" },
+    { "id": "item-8", "image": "lemonade.png", "name": "Signature Marinade Bottle", "price": "৳14", "desc": "Our secret family marinade recipe, perfect for grilling chicken or vegetables.", "label": "Pantry" },
+    { "id": "item-9", "image": "hero-bg.jpg", "name": "Cooking Masterclass (Virtual)", "price": "৳45", "desc": "Join a 2-hour live virtual cooking class with our head chef.", "label": "Event" },
+    { "id": "item-10", "image": "cookies.png", "name": "Seasonal Dessert Box", "price": "৳30", "desc": "A rotating selection of seasonal sweets and pastries.", "label": "Sweet Treats" }
 ]
 
 import re
